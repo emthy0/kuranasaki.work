@@ -2,7 +2,7 @@
 <script lang="ts">
   import Header from './components/Header.svelte';
   import Footer from './components/Footer.svelte';
-  import Project from './components/Project.svelte';
+  import Project from './components/ProjectCard.svelte';
 
   let projects: { title: string, description: string, link: string }[] = [
     {
