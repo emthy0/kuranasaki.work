@@ -1,7 +1,26 @@
-import { vitePreprocess } from "@sveltejs/vite-plugin-svelte";
+import adapter from "@sveltejs/adapter-cloudflare"
+import autoPreprocess from "svelte-preprocess"
+import tailwind from "tailwindcss"
+import autoprefixer from "autoprefixer"
+import { vitePreprocess } from "@sveltejs/vite-plugin-svelte"
 
-export default {
-  // Consult https://svelte.dev/docs#compile-time-svelte-preprocess
-  // for more information about preprocessors
-  preprocess: [vitePreprocess({})],
-};
+/** @type {import('@sveltejs/kit').Config} */
+const config = {
+  preprocess: [autoPreprocess({}), vitePreprocess({})],
+  kit: {
+    alias: {
+      components: "./src/components",
+      assets: "./static",
+    },
+    adapter: adapter({
+      // See below for an explanation of these options
+      routes: {
+        include: ["/*"],
+        exclude: ["<all>"],
+      },
+    }),
+    // ... truncated ...
+  },
+}
+
+export default config
